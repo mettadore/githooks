@@ -21,7 +21,7 @@ post '/payload' do
     {
       fallback: 'Attachment',
       color: 'good',
-      text: k,
+      pretext: k,
       fields: format_fields(v)
     }
   end
