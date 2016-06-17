@@ -10,7 +10,7 @@ post '/payload' do
     {
       fallback: 'Attachment',
       color: 'good',
-      text: v.class,
+      text: v.class.name,
       fields: v
     }
   end
