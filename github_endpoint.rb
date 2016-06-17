@@ -12,5 +12,6 @@ post '/payload' do
       text: k,
       fields: v
     }
+  end
   Slack::Notifier.ping "Github Payload", icon_url: icon_url, attachments: attachments
 end
