@@ -18,4 +18,4 @@ class GithubSlacker
   end
 end
 
-GithubSlacker.new.run
+#GithubSlacker.new.run
