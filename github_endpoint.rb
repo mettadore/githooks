@@ -9,7 +9,7 @@ def format_fields(fields)
     when Hash
       fields.map { |k, v| {title: k.to_s, value: v.to_s} }
     else
-      Array.wrap(fields)
+      [fields]
   end
 end
 
