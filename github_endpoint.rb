@@ -5,6 +5,7 @@ require 'slack-notifier'
 post '/payload' do
   push = JSON.parse(request.body.read)
   icon_url = 'https://upload.wikimedia.org/wikipedia/en/a/a6/Bender_Rodriguez.png'
+  slack = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
   attachments = push.map do |k,v|
     {
       fallback: 'Attachment',
@@ -13,5 +14,5 @@ post '/payload' do
       fields: v
     }
   end
-  Slack::Notifier.ping "Github Payload", icon_url: icon_url, attachments: attachments
+  slack.ping "Github Payload", icon_url: icon_url, attachments: attachments
 end
