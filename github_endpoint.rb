@@ -28,7 +28,7 @@ post '/payload' do
     }
   end
 
-  if push['action'] == 'opened' &&
+  if push['action'] == 'merged' &&
     !push['pull_request'].nil? &&
     push['pull_request']['title'].match(/QMS/)
     client = Octoclient.new(push['repository']['full_name'])
