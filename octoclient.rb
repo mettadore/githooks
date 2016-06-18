@@ -22,14 +22,13 @@ class Octoclient
     @client.labels_for_issue(@repo, issue)
   end
   def labeled?(issue)
-    current_labels(issue).detect{|l| l[:name] == current_label_name }.present?
+    !current_labels(issue).detect{|l| l[:name] == current_label_name }.nil?
   end
   def label_exists?
-    @client.labels(@repo).detect{|l| l[:name] == current_label_name }.present?
+    !@client.labels(@repo).detect{|l| l[:name] == current_label_name }.nil?
   end
   def label!(issue)
     add_label(issue)
-    label[:name]
   end
 
   def current_label_name
@@ -45,10 +44,16 @@ class Octoclient
   end
 
   def color_from_date
-    '#dedede'
+    'dedede'
   end
 
   def pull_requests
     @client.list_issues(@repo).select{|i| i[:pull_request]}
   end
 end
+
+
+c = Octoclient.new
+binding.pry
+
+blah = 'blah'

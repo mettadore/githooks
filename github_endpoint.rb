@@ -18,7 +18,7 @@ post '/payload' do
   push = JSON.parse(request.body.read)
   icon_url = 'https://upload.wikimedia.org/wikipedia/en/a/a6/Bender_Rodriguez.png'
   slack = Slack::Notifier.new(ENV['SLACK_WEBHOOK_URL'])
-  attachments = push.select {|k,_v| %w{action pull_request}.include?(k) }.map do |k, v|
+  attachments = push.select { |k, _v| %w{action pull_request}.include?(k) }.map do |k, v|
     {
       fallback: 'Attachment',
       color: 'good',
@@ -26,11 +26,12 @@ post '/payload' do
       fields: format_fields(v)
     }
   end
-  #if push[:action] == 'opened'
-  #  && push[:pull_request].present?
-  #  && push[:pull_request][:title].match(/QMS/)
-  slack.ping "Github Payload", icon_url: icon_url, attachments: attachments
-  #client = Octoclient.new(push[:repository][:full_name])
-  #  client.label!(push[:pull_request][:number])
-
+  if push[:action] == 'opened'
+    && !push[:pull_request].nil?
+    && push[:pull_request][:title].match(/QMS/)
+    string = "'#{push[:pull_request][:title]}' #{push[:action]}: #{push[:pull_request][:number]}"
+    slack.ping string, icon_url: icon_url, attachments: attachments
+    client = Octoclient.new(push[:repository][:full_name])
+    client.label!(push[:pull_request][:number])
+  end
 end
