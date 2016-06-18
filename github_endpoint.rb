@@ -26,6 +26,7 @@ post '/payload' do
       fields: format_fields(v)
     }
   end
+  slack.ping push[:action], icon_url: icon_url
   if push[:action] == 'opened' #&&
     #!push[:pull_request].nil? &&
     #push[:pull_request][:title].match(/QMS/)
