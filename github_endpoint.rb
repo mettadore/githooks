@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'json'
 require 'slack-notifier'
+require './octaclient'
 
 def format_fields(fields)
   case fields
@@ -26,4 +27,8 @@ post '/payload' do
     }
   end
   slack.ping "Github Payload", icon_url: icon_url, attachments: attachments
+  if push[:action] == 'opened'
+    client = Octaclient.new(push[:repository][:full_name])
+    client.
+  end  
 end
