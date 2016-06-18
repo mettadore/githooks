@@ -51,9 +51,3 @@ class Octoclient
     @client.list_issues(@repo).select{|i| i[:pull_request]}
   end
 end
-
-
-c = Octoclient.new
-binding.pry
-
-blah = 'blah'
