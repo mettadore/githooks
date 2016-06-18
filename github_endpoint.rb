@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'json'
 require 'slack-notifier'
-require './octaclient'
+require './octoclient'
 
 def format_fields(fields)
   case fields
