@@ -30,7 +30,7 @@ post '/payload' do
   #  && push[:pull_request].present?
   #  && push[:pull_request][:title].match(/QMS/)
   slack.ping "Github Payload", icon_url: icon_url, attachments: attachments
-  #client = Octaclient.new(push[:repository][:full_name])
+  #client = Octoclient.new(push[:repository][:full_name])
   #  client.label!(push[:pull_request][:number])
 
 end
