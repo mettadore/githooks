@@ -26,9 +26,9 @@ post '/payload' do
       fields: format_fields(v)
     }
   end
-  if push[:action] == 'opened' &&
-    !push[:pull_request].nil? &&
-    push[:pull_request][:title].match(/QMS/)
+  if push[:action] == 'opened' #&&
+    #!push[:pull_request].nil? &&
+    #push[:pull_request][:title].match(/QMS/)
     client = Octoclient.new(push[:repository][:full_name])
     string = "PR ##{push[:pull_request][:number]} #{push[:action]} and labeled '#{client.current_label_name}'"
     slack.ping string, icon_url: icon_url
