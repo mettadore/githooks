@@ -27,10 +27,11 @@ post '/payload' do
       fields: format_fields(v)
     }
   end
-  if push[:action] == 'opened'
-    && push[:pull_request].present?
-    && push[:pull_request][:title].match(/QMS/)
+  #if push[:action] == 'opened'
+  #  && push[:pull_request].present?
+  #  && push[:pull_request][:title].match(/QMS/)
+  attachments = {action: push[:action], pull: push[:pull_request].present?, title: push[:pull_request][:title]}
     slack.ping "Github Payload", icon_url: icon_url, attachments: attachments    client = Octaclient.new(push[:repository][:full_name])
-    client.label!(push[:pull_request][:number])
+  #  client.label!(push[:pull_request][:number])
   end
 end
